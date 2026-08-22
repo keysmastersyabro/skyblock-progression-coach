@@ -1,0 +1,14 @@
+.gradle/
+build/
+run/
+out/
+.idea/
+*.iml
+config/
+*.log
+
+# Never commit credentials or local launcher state.
+.env
+*.key
+*.pem
+

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "progressioncoach",
+  "version": "${version}",
+  "name": "SkyBlock Progression Coach",
+  "description": "A read-only Hypixel SkyBlock progression planner powered by profile and Bazaar data.",
+  "authors": ["SkyBlock Progression Coach contributors"],
+  "contact": {
+    "sources": "https://github.com/keysmastersyabro/skyblock-progression-coach",
+    "issues": "https://github.com/keysmastersyabro/skyblock-progression-coach/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.progressioncoach.ProgressionCoachClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
+

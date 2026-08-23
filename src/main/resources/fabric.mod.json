@@ -3,7 +3,7 @@
   "id": "progressioncoach",
   "version": "${version}",
   "name": "SkyBlock Progression Coach",
-  "description": "A read-only Hypixel SkyBlock progression planner powered by profile and Bazaar data.",
+  "description": "A read-only Hypixel SkyBlock profile auditor with measurable goal checkpoints and live Bazaar context.",
   "authors": ["SkyBlock Progression Coach contributors"],
   "contact": {
     "sources": "https://github.com/keysmastersyabro/skyblock-progression-coach",

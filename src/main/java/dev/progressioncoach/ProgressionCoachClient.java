@@ -7,6 +7,7 @@ import dev.progressioncoach.api.ProfileSnapshot;
 import dev.progressioncoach.config.CoachConfig;
 import dev.progressioncoach.planner.ProgressionGoal;
 import dev.progressioncoach.planner.ProgressionPlanner;
+import dev.progressioncoach.planner.Milestone;
 import dev.progressioncoach.planner.Recommendation;
 import dev.progressioncoach.ui.CoachScreen;
 import java.nio.file.Path;
@@ -36,6 +37,7 @@ public final class ProgressionCoachClient implements ClientModInitializer {
     private HypixelApiClient api;
     private volatile ProfileSnapshot snapshot;
     private volatile List<Recommendation> recommendations = List.of();
+    private volatile List<Milestone> milestones = List.of();
     private volatile String state = "NOT CONFIGURED";
     private volatile String lastError = "";
     private volatile Instant lastRefresh;
@@ -118,6 +120,7 @@ public final class ProgressionCoachClient implements ClientModInitializer {
             }
             snapshot = value;
             recommendations = planner.plan(value, goal());
+            milestones = planner.milestones(value, goal());
             lastRefresh = Instant.now();
             state = "READY";
             lastError = "";
@@ -130,6 +133,7 @@ public final class ProgressionCoachClient implements ClientModInitializer {
         CoachConfig.save(FabricLoader.getInstance().getConfigDir().resolve(MOD_ID).resolve("config.json"), config);
         api.updateConfig(config);
         recommendations = planner.plan(snapshot, selected);
+        milestones = planner.milestones(snapshot, selected);
     }
 
     public boolean apiKeyConfigured() { return config != null && !config.safeApiKey().isBlank(); }
@@ -138,6 +142,7 @@ public final class ProgressionCoachClient implements ClientModInitializer {
     public String lastError() { return lastError == null ? "" : lastError; }
     public ProfileSnapshot snapshot() { return snapshot; }
     public List<Recommendation> recommendations() { return recommendations; }
+    public List<Milestone> milestones() { return milestones; }
     public ProgressionGoal goal() { return config == null ? ProgressionGoal.COMBAT : config.parsedGoal(); }
 
     public String lastRefreshText() {
